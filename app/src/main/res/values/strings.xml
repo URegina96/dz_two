@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Astar_dz_two</string>
+    <string name="button_сreate_user">Создать пользователя</string>
+    <string name="user_name">Ваше имя:</string>
+    <string name="user_age">Ваш возраст:</string>
+    <string name="save">Сохранить</string>
+</resources>
