@@ -18,28 +18,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewUsers=findViewById(R.id.textViewUser);
-        buttonCreateUser=findViewById(R.id.buttonCreateUser);//шаг -1 инициализируем
+        textViewUsers = findViewById(R.id.textViewUser);
+        buttonCreateUser = findViewById(R.id.buttonCreateUser);//шаг -1 инициализируем
 
         //шаг-2 добавляем (один из трех вариантов добавления) слушателя кнопки OnClick
         buttonCreateUser.setOnClickListener(view -> { // шаг-2.1 создастся метод-слушатель кнопки
-            Intent intent=new Intent(getApplicationContext(),CreateUser.class);//шаг-2.2 пользователь кликает по кнопке переходя в другую активность
+            Intent intent = new Intent(getApplicationContext(), CreateUser.class);//шаг-2.2 пользователь кликает по кнопке переходя в другую активность
             startActivity(intent);
         });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //getApplicationContext() - это метод, который вызывается для получения контекста приложения. Контекст предоставляет доступ к ресурсам и операциям, связанным с приложением.
