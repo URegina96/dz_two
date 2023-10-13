@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {//шаг-6 создается к
     public static final String KEY_AGE = "age"; //для заголовков столбцов таблицы
 
 
-    public DBHelper(@Nullable Context context, @Nullable String name, int version) {    //6.2- реализовываем конструктор
+    public DBHelper(@Nullable Context context) {    //6.2- реализовываем конструктор
         super(context, DATABASE_NAME, null, DATABASE_VERSION); //используем константы
     }
 
@@ -30,10 +30,10 @@ public class DBHelper extends SQLiteOpenHelper {//шаг-6 создается к
     }
 
     @Override//шаг-6.1 реализуется два обязательных абстракных метода с аннотаций   @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {//метод вызывается при изменени в базе данных ( а именно удаление и востановление - это когда меняется версия бд)
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {//метод вызывается при изменени в базе данных ( а именно удаление и востановление - это когда меняется версия бд)
         //шаг -6.5 запрос на дроп таблицы, затем можно вызвать метод создания новой версии таблицы с обновлённой структурой
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
-        onCreate(sqLiteDatabase);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        onCreate(db);
     }
 }
 

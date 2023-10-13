@@ -2,7 +2,9 @@ package com.example.astar_dz_two;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewUsers; //шаг-0 объявляем элементы экрана
     private Button buttonCreateUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 //getApplicationContext() - это метод, который вызывается для получения контекста приложения. Контекст предоставляет доступ к ресурсам и операциям, связанным с приложением.
 //Контекст приложения представляет собой глобальный контекст, который действует на протяжении всего жизненного цикла приложения. Он может быть использован в различных ситуациях, например, для получения доступа к ресурсам приложения, запуска новых активностей и служителей, создания уведомлений и т. д.
 //etApplicationContext() используется в примере для создания Intent, который необходим для запуска новой активности. Он требует контекста приложения в качестве первого аргумента. Вы можете использовать и другие методы для получения контекста, такие как this или ActivityName.this, в зависимости от контекста, в котором вы находитесь.
@@ -45,3 +59,6 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 //        }
 //        });
+
+//SQLiteDatabase  - этот класс предназначен для управления базой данных SQLite
+//getWritableDatabase() -  метод вспомогательного класса, что бы открыть и вернуть экземпляр базы данных с которым будем работать (доступен для чтения и записи), если бд не существует , то он вызывает свой метод onCreate, если изменилось то метод onUpgrade
