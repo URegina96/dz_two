@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {//шаг-6 создается к
     public void onCreate(SQLiteDatabase sqLiteDatabase) {//метод вызывается при создании базы данных
         //шаг-6.4 реализация логики создания таблиц и заполнения данными при помощи специальных команд SQL
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_CONTACTS + " (" + KEY_ID
-                + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT, " + KEY_AGE + " TEXT)");
+                + " INTEGER, " + KEY_NAME + " TEXT, " + KEY_AGE + " TEXT)");
 
     }
 
@@ -40,3 +40,26 @@ public class DBHelper extends SQLiteOpenHelper {//шаг-6 создается к
 
 //6.2 в конструкторе суперкласса передаем параметры (контекст, имя базы данных, объект класса курсов factory (на данный момент заnullим его так как не будем использовать), версия базы данных)
 //drop table -  запрос на уничтожение таблицы базы данных
+
+
+//    Поиск решения проблемы с присвоением id пользователя, сейчас выдает значение +2 к предыдущему пользователю, вместо порядкового номера
+//
+//    public DBHelper(Context context) {
+//        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+//    }
+//
+//    @Override
+//    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+//        String createTableQuery = "CREATE TABLE " + TABLE_CONTACTS + " (" +
+//                KEY_ID + " INTEGER PRIMARY KEY, " +
+//                KEY_NAME + " TEXT, " +
+//                KEY_AGE + " TEXT)";
+//
+//        sqLiteDatabase.execSQL(createTableQuery);
+//    }
+//
+//    @Override
+//    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+//        onCreate(sqLiteDatabase);
+//    }

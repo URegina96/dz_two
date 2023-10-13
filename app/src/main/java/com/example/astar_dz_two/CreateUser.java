@@ -15,7 +15,7 @@ public class CreateUser extends AppCompatActivity {
     private EditText editTextUserAge;
     private Button buttonSave;
 
-    DBHelper dbHelper; //шаг-7 объявляем и создаем его экземпляр
+    DBHelper dbHelper; //шаг-7 объявляем
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class CreateUser extends AppCompatActivity {
             String name = editTextUserName.getText().toString();//шаг-5 получение значения из полей ввода
             String age = editTextUserAge.getText().toString();
 
-            SQLiteDatabase database=dbHelper.getWritableDatabase(); //шаг-8 создаю объект класса  SQLiteDatabase, его название dbHelper
+            SQLiteDatabase database=dbHelper.getWritableDatabase(); //шаг-8 создаю объект класса  SQLiteDatabase, его название database
 
             ContentValues contentValues =new ContentValues(); //шаг-9 создаем объект класса, который используется для добавления новых строк в таблицу (каждый объект этого класса  представляет собой  строку таблицы и выглядит как массив с именами столбцов и значениями которые ему соответствует)
             //шаг-9.1 заполняется парами - имя поля и значение
@@ -49,6 +49,13 @@ public class CreateUser extends AppCompatActivity {
                 startActivity(intent);
             }
             Toast.makeText(getApplicationContext(), "Данные успешно сохранены", Toast.LENGTH_SHORT).show(); //шаг-12 добавляем toast для того что бы узнать (и показать пользователю) что данные сохранились
+
+            if (id > 10) {//шаг-16 для проверки работы базы данных сделаем максимальное количество пользователей 60
+//                Здесь мы используем метод getVersion(), чтобы получить текущую версию базы данных. Затем мы увеличиваем newVersion на 1 и передаем значения oldVersion и newVersion в метод onUpgrade
+                int oldVersion = database.getVersion(); // Получаем текущую версию базы данных
+                int newVersion = oldVersion + 1;
+                dbHelper.onUpgrade(database, oldVersion, newVersion);//шаг-16.1 Вызов метода onUpgrade() для удаления таблицы и создания новой
+            }
         });
         dbHelper.close(); //шаг-10 закрываем соединение с базой данных
     }
