@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewUsers; //шаг-0 объявляем элементы экрана
     private Button buttonCreateUser;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), CreateUser.class);//шаг-2.2 пользователь кликает по кнопке переходя в другую активность
             startActivity(intent);
         });
+        String name = getIntent().getStringExtra("name"); //шаг-13 На MainActivity вы должны извлечь переданные данные с помощью getIntent().getStringExtra()
+        String age = getIntent().getStringExtra("age");
+        long id = getIntent().getLongExtra("id", 0); //шаг-14.2 извлекаем  полученное id
+        textViewUsers.setText("ID - "+id +"\n" + "Name - " + name +"\n" +  "Age - " + age); //шаг-15 - передаем значения на экран
     }
 }
 

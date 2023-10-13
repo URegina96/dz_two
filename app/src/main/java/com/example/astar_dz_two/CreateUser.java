@@ -39,13 +39,13 @@ public class CreateUser extends AppCompatActivity {
             //шаг-9.1 заполняется парами - имя поля и значение
             contentValues.put(DBHelper.KEY_NAME,name);
             contentValues.put(DBHelper.KEY_AGE,age);
-            //id заполняется автоматически
+            long id = database.insert(DBHelper.TABLE_CONTACTS, null, contentValues); //шаг-14 получаем id
             database.insert(DBHelper.TABLE_CONTACTS,null,contentValues);//шаг-9.2 методом .insert вставляются подготовленные строки в таблицу
-
-            if (!(name ==null) && !(age ==null)){ //шаг-11 запускаем условие, что если все строки не пустые, до предыдущая активность с введенными данными пользователя
+            if (!(name ==null) && !(age ==null)){ //шаг-11 запускаем условие, что если все строки не пустые, то предыдущая активность с введенными данными пользователя запускается
                 Intent intent=new Intent(this, MainActivity.class);
-                intent.putExtra("name", name); // Передаем значение name в MainActivity
+                intent.putExtra("name", name); // Передаем значение nameв MainActivity
                 intent.putExtra("age", age); // Передаем значение age в MainActivity
+                intent.putExtra("id", id); //шаг-14.1 включаем значение идентификатора
                 startActivity(intent);
             }
             Toast.makeText(getApplicationContext(), "Данные успешно сохранены", Toast.LENGTH_SHORT).show(); //шаг-12 добавляем toast для того что бы узнать (и показать пользователю) что данные сохранились
