@@ -40,7 +40,9 @@ public class CreateUser extends AppCompatActivity {
             contentValues.put(DBHelper.KEY_NAME,name);
             contentValues.put(DBHelper.KEY_AGE,age);
             long id = database.insert(DBHelper.TABLE_CONTACTS, null, contentValues); //шаг-14 получаем id
-            database.insert(DBHelper.TABLE_CONTACTS,null,contentValues);//шаг-9.2 методом .insert вставляются подготовленные строки в таблицу
+
+//            database.insert(DBHelper.TABLE_CONTACTS,null,contentValues);//шаг-9.2 методом .insert вставляются подготовленные строки в таблицу
+
             if (!(name ==null) && !(age ==null)){ //шаг-11 запускаем условие, что если все строки не пустые, то предыдущая активность с введенными данными пользователя запускается
                 Intent intent=new Intent(this, MainActivity.class);
                 intent.putExtra("name", name); // Передаем значение nameв MainActivity
