@@ -11,19 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
  * Адаптер нужен для того что бы отобразить данные в виде списка. Сам RecyclerView понятия не
  * имеет как ему отображать данные, потому что структура данных может быть разная, и для того
- * что бы RecyclerView понимал как ему отображать список - делается адаптер.
+ * что бы RecyclerView понимал, как ему отображать список - делается адаптер.
  */
 public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
-    // Список пользоваетелей для отображения
+    // Список пользователей для отображения
     private final List<User> users = new ArrayList<>();
     // Инфлейтер нужен для того что бы "превратить" макет элемента списка в представление View
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
+
+    private final ResourceProvider resources;
+
+    public UsersAdapter(LayoutInflater inflater, ResourceProvider resources) {
+        this.inflater = inflater;
+        this.resources = resources;
+    }
 
     /**
      * Этот метод просто обновляет список новыми данными
@@ -33,17 +41,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
         this.users.clear();
         this.users.addAll(newUsers);
         notifyDataSetChanged();
-    }
-
-    /**
-     * Этот метод вызывается когда адаптер "прикрепляется" к RecyclerView
-     * @param recyclerView это элемент отображения списка, к которому прикреплен данный адаптер
-     */
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        // инифиализируем инфлейтер
-        inflater = LayoutInflater.from(recyclerView.getContext());
     }
 
     /**
@@ -59,13 +56,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
     /**
      * А этот метод вызывается когда к созданному представлению элемента списка привязываются
      * нужные данные для отображения
-     * */
+     */
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
-        holder.textId.setText("" + user.getId());  // отображаем ID
-        holder.textName.setText(user.getName());   // отображаем имя
-        holder.textAge.setText("" + user.getAge());// отображаем возраст
+        holder.textId.setText(String.format(Locale.getDefault(), "%d", user.getId()));  // отображаем ID
+        holder.textName.setText(resources.string(R.string.name_s, user.getName()));   // отображаем имя
+        holder.textAge.setText(resources.string(R.string.age_d, user.getAge()));         // отображаем возраст
     }
 
     /**
@@ -76,7 +73,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
         return users.size();
     }
 }
-
 
 /**
  * Класс который хранит состояние представления элементов списка
