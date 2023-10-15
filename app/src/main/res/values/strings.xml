@@ -4,4 +4,5 @@
     <string name="user_name">Ваше имя:</string>
     <string name="user_age">Ваш возраст:</string>
     <string name="save">Сохранить</string>
+    <string name="age_d">Возраст: %d</string>
 </resources>
