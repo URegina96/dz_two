@@ -2,11 +2,8 @@ package com.example.astar_dz_two;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         //шаг-2 добавляем (один из трех вариантов добавления) слушателя кнопки OnClick
         buttonCreateUser.setOnClickListener(view -> { // шаг-2.1 создастся метод-слушатель кнопки
-            Intent intent = new Intent(getApplicationContext(), CreateUser.class);//шаг-2.2 пользователь кликает по кнопке переходя в другую активность
+            Intent intent = new Intent(getApplicationContext(), CreateUserActivity.class);//шаг-2.2 пользователь кликает по кнопке переходя в другую активность
             startActivity(intent);
         });
         String name = getIntent().getStringExtra("name"); //шаг-13 На MainActivity вы должны извлечь переданные данные с помощью getIntent().getStringExtra()
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //// Обычно в этом методе размещается код, который создает нового пользователя или выполняет другие действия при нажатии кнопки
 //@Override // шаг-2.1 переопределяется метод
 //public void onClick(View view) { // шаг-2.2 создастся метод
-//        Intent intent=new Intent(getApplicationContext(),CreateUser.class);//шаг-2.3 пользователь кликает по кнопке переходя в другую активность
+//        Intent intent=new Intent(getApplicationContext(),CreateUserActivity.class);//шаг-2.3 пользователь кликает по кнопке переходя в другую активность
 //        startActivity(intent);
 //        }
 //        });
