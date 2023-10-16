@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private UsersAdapter usersAdapter;
     private UserDao userDao;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +26,13 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
         setupButtons();
         setupDatabase();
+        setupViewModel();
+    }
 
-        // получение списка пользователей из базы данных
-        List<User> users = userDao.getUsers();
-        // отображение списка пользователей в списке
-        usersAdapter.update(users);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.reloadUsers();
     }
 
     /**
@@ -46,6 +51,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerUsers.setLayoutManager(manager);
         recyclerUsers.addItemDecoration(decoration);
         recyclerUsers.setAdapter(usersAdapter);
+        usersAdapter.setOnDeleteUserListener(new OnDeleteUserListener() {
+            @Override
+            public void onDelete(long id) {
+                deleteUser(id);
+            }
+        });
+    }
+
+    private void deleteUser(long id) {
+        userDao.deleteUser(id);
+        List<User> users = userDao.getUsers();
+        usersAdapter.update(users);
     }
 
     /**
@@ -66,4 +83,12 @@ public class MainActivity extends AppCompatActivity {
         userDao = DBHelper.getInstance(this);    // получаем объект базы данных
     }
 
+    private void setupViewModel() {
+        ViewModelProvider.Factory factory = new MainViewModel.Factory(userDao);
+        viewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+        viewModel.observeUsers(this, users -> {
+            // обновление списка
+            usersAdapter.update(users);
+        });
+    }
 }

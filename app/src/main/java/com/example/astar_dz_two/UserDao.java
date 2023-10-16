@@ -17,4 +17,6 @@ public interface UserDao {
      * @param user достаточно передать только имя и возраст
      */
     void createUser(User user);
+
+    void deleteUser(long id);
 }

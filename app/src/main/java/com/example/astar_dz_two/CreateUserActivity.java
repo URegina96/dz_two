@@ -1,6 +1,7 @@
 package com.example.astar_dz_two;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -17,6 +18,7 @@ public class CreateUserActivity extends AppCompatActivity {
     private EditText editTextUserName; //шаг-0 объявляем элементы экрана
     private EditText editTextUserAge;
     private UserDao userDao; //шаг-7 объявляем
+    private ResourceProvider resourceProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

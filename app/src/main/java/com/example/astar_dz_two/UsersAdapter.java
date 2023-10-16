@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,9 +29,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     private final ResourceProvider resources;
 
+    private OnDeleteUserListener onDeleteUserListener;
+
     public UsersAdapter(LayoutInflater inflater, ResourceProvider resources) {
         this.inflater = inflater;
         this.resources = resources;
+    }
+
+    public void setOnDeleteUserListener(OnDeleteUserListener listener) {
+        this.onDeleteUserListener = listener;
     }
 
     /**
@@ -63,6 +70,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
         holder.textId.setText(String.format(Locale.getDefault(), "%d", user.getId()));  // отображаем ID
         holder.textName.setText(resources.string(R.string.name_s, user.getName()));   // отображаем имя
         holder.textAge.setText(resources.string(R.string.age_d, user.getAge()));         // отображаем возраст
+        holder.imageDeleteUser.setOnClickListener(v -> {
+            onDeleteUserListener.onDelete(user.getId());
+        });
     }
 
     /**
@@ -81,12 +91,18 @@ class UserViewHolder extends RecyclerView.ViewHolder {
     TextView textId;
     TextView textName;
     TextView textAge;
+    ImageView imageDeleteUser;
 
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
         textId = itemView.findViewById(R.id.text_user_id);
         textName = itemView.findViewById(R.id.text_name);
         textAge = itemView.findViewById(R.id.text_age);
+        imageDeleteUser = itemView.findViewById(R.id.button_delete_user);
     }
 
+}
+
+interface OnDeleteUserListener {
+    void onDelete(long id);
 }

@@ -8,6 +8,7 @@ public class User {
     private long id;
     private String name;
     private int age;
+    private int weight = 0;
 
     public User(String name, int age) {
         this.name = name;
@@ -26,6 +27,10 @@ public class User {
         this.age = age;
     }
 
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     public long getId() {
         return id;
     }
@@ -36,6 +41,10 @@ public class User {
 
     public int getAge() {
         return age;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     @Override
