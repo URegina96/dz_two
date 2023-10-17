@@ -4,11 +4,16 @@ import static android.view.View.inflate;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг 19 – создаем UsersAdapter
+    private final List<User> users = new ArrayList<>(); // Список пользоваетелей для отображения
 
     @NonNull
     @Override
@@ -17,6 +22,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {//шаг 19.2 – метод вызывается, когда к созданному представлению элемента списка привязываются нужные данные для отображения
+        User user = users.get(position);
+        holder.textId.setText("" + user.getId());  // отображаем ID
+        holder.textName.setText(user.getName());   // отображаем имя
+        holder.textAge.setText("" + user.getAge());// отображаем возраст
 
     }
 
@@ -25,12 +34,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг
         return 0;
     }
 
+}
 
-    public class UserViewHolder extends RecyclerView.ViewHolder {//шаг 19.4 – класс который хранит состояние представления элементов списка
+class UserViewHolder extends RecyclerView.ViewHolder {//шаг 19.4 – класс который хранит состояние представления элементов списка
+    TextView textId;
+    TextView textName;
+    TextView textAge;
 
-        public UserViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
+    public UserViewHolder(@NonNull View itemView) {
+        super(itemView);
+        textId = itemView.findViewById(R.id.text_user_id);
+        textName = itemView.findViewById(R.id.text_name);
+        textAge = itemView.findViewById(R.id.text_age);
     }
 }
 
