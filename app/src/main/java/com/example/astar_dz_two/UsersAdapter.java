@@ -2,6 +2,7 @@ package com.example.astar_dz_two;
 
 import static android.view.View.inflate;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,17 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг 19 – создаем UsersAdapter
-    private final List<User> users = new ArrayList<>(); // Список пользоваетелей для отображения
+public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг 19 – создаем UsersAdapter //<*порядок создания - 2 (extends RecyclerView.Adapter<указывается тип ViewHolder - определенный тип списка>)*>
+    private final List<User> users = new ArrayList<>(); // Список пользоваетелей для отображения       <*порядок создания - 4*>
 
     @NonNull
     @Override
-    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //шаг 19.1 – метод вызывается, когда создается представление элемента списка
+    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //шаг 19.1 – метод вызывается, когда создается представление элемента списка (тут создаются элементы ViewHolder) <*порядок создания - 3*>
+        //inflater.inflate - конвертирует (надувает) xml макета  в View представление макета (так как нам нужны элементы для ViewHolder)
+//<*порядок создания - 3.2*>
+
+
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {//шаг 19.2 – метод вызывается, когда к созданному представлению элемента списка привязываются нужные данные для отображения
-        User user = users.get(position);
+    public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {//шаг 19.2 – метод вызывается, когда к созданному представлению элемента списка привязываются нужные данные для отображения <*порядок создания - 3*>
+        User user = users.get(position); //<*порядок создания - 3.3*>
         holder.textId.setText("" + user.getId());  // отображаем ID
         holder.textName.setText(user.getName());   // отображаем имя
         holder.textAge.setText("" + user.getAge());// отображаем возраст
@@ -30,25 +36,24 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг
     }
 
     @Override
-    public int getItemCount() {//шаг 19.3 – метод вызывается, когда просто возвращаем количество элементов в списке
-        return 0;
+    public int getItemCount() {//шаг 19.3 – метод вызывается, когда просто возвращаем количество элементов в списке <*порядок создания - 3*>
+        return users.size();//для того что бы адаптер понимал , сколько вообще ему надо создать элементов  <*порядок создания - 3.1*>
     }
 
 }
 
-class UserViewHolder extends RecyclerView.ViewHolder {//шаг 19.4 – класс который хранит состояние представления элементов списка
-    TextView textId;
+class UserViewHolder extends RecyclerView.ViewHolder {//шаг 19.4 – класс который хранит состояние представления элементов списка   <* порядок создания - 1 *> <*порядок создания - 1.1 ( extends RecyclerView.ViewHolder ) *>
+    TextView textId;//<*порядок создания - 2.1.2*>
     TextView textName;
     TextView textAge;
 
-    public UserViewHolder(@NonNull View itemView) {
+    public UserViewHolder(@NonNull View itemView) { //параметр itemView - один элемент списка (с данными одного user)      <*порядок создания - 1.2*>
         super(itemView);
-        textId = itemView.findViewById(R.id.text_user_id);
+        textId = itemView.findViewById(R.id.text_user_id); //<*порядок создания - 2.1.1*>
         textName = itemView.findViewById(R.id.text_name);
         textAge = itemView.findViewById(R.id.text_age);
     }
 }
-
 
 //Класс UsersAdapter наследуется от RecyclerView.Adapter для того, чтобы ты мог создавать адаптеры для отображения списков пользователей внутри RecyclerView. Наследование от RecyclerView.
 //Adapter позволяет использовать все его функциональные возможности, такие как создание и управление представлениями элементов списка, обновление данных и обработка событий

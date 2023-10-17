@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
-
+    // private void setupRecyclerView() { } создать для теста
 
 
 
