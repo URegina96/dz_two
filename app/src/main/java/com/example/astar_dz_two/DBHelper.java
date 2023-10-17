@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {//шаг-6 создается к
     public void onCreate(SQLiteDatabase sqLiteDatabase) {//метод вызывается при создании базы данных
         //шаг-6.4 реализация логики создания таблиц и заполнения данными при помощи специальных команд SQL
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_CONTACTS + " (" + KEY_ID
-                + " INTEGER, " + KEY_NAME + " TEXT, " + KEY_AGE + " TEXT)");
+                + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME + " TEXT, " + KEY_AGE + " TEXT)");
 
     }
 

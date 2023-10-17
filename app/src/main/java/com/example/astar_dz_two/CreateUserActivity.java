@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CreateUser extends AppCompatActivity {
+public class CreateUserActivity extends AppCompatActivity {
     private EditText editTextUserName; //шаг-0 объявляем элементы экрана
     private EditText editTextUserAge;
     private Button buttonSave;
@@ -43,7 +43,7 @@ public class CreateUser extends AppCompatActivity {
 
 //            database.insert(DBHelper.TABLE_CONTACTS,null,contentValues);//шаг-9.2 методом .insert вставляются подготовленные строки в таблицу
 
-            if (!(name ==null) && !(age ==null)){ //шаг-11 запускаем условие, что если все строки не пустые, то предыдущая активность с введенными данными пользователя запускается
+            if (name !=null && age !=null){ //шаг-11 запускаем условие, что если все строки не пустые, то предыдущая активность с введенными данными пользователя запускается
                 Intent intent=new Intent(this, MainActivity.class);
                 intent.putExtra("name", name); // Передаем значение nameв MainActivity
                 intent.putExtra("age", age); // Передаем значение age в MainActivity
