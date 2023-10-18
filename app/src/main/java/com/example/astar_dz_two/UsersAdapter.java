@@ -16,14 +16,14 @@ import java.util.List;
 public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг 19 – создаем UsersAdapter //<*порядок создания - 2 (extends RecyclerView.Adapter<указывается тип ViewHolder - определенный тип списка>)*>
     private final List<User> users = new ArrayList<>(); // Список пользоваетелей для отображения       <*порядок создания - 4*>
 
+    private LayoutInflater inflater;//<*порядок создания - 3.2.1*>
+
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //шаг 19.1 – метод вызывается, когда создается представление элемента списка (тут создаются элементы ViewHolder) <*порядок создания - 3*>
         //inflater.inflate - конвертирует (надувает) xml макета  в View представление макета (так как нам нужны элементы для ViewHolder)
-//<*порядок создания - 3.2*>
-
-
-
+        View view = inflater.inflate(R.layout.activity_item_user, parent, false); //всегда используем false         //<*порядок создания - 3.2.2*>
+        return new UserViewHolder(view);
     }
 
     @Override
@@ -38,6 +38,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {//шаг
     @Override
     public int getItemCount() {//шаг 19.3 – метод вызывается, когда просто возвращаем количество элементов в списке <*порядок создания - 3*>
         return users.size();//для того что бы адаптер понимал , сколько вообще ему надо создать элементов  <*порядок создания - 3.1*>
+    }
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) { //шаг 19.5 – метод вызывается, когда адаптер "прикрепляется" к RecyclerView; @param recyclerView это элемент отображения списка, к которому прикреплен данный адаптер //<*порядок создания - 5*>
+        super.onAttachedToRecyclerView(recyclerView);
+
+        inflater = LayoutInflater.from(recyclerView.getContext());
     }
 
 }
