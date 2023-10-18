@@ -14,8 +14,6 @@ import android.widget.TextView;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //    private TextView textViewUsers; //шаг-0 объявляем элементы экрана
-//    private Button buttonCreateUser;
     private UserDao userDao;
     private UsersAdapter usersAdapter;
 
@@ -28,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
         setupButtons();
         setupDatabase();
-        List<User> users = userDao.getUsers();
+        List<User> users = userDao.getUsers();// получение списка пользователей из базы данных
 
-        usersAdapter.update(users);
+        usersAdapter.update(users); // отображение списка пользователей в списке , для него в адаптере добавляем метод шаг - 21
     }
 
     private void setupDatabase() {  //шаг - 20.3 Настраиваем базу данных
