@@ -6,7 +6,7 @@ public class User {//шаг 17 – создаем User
     private long id; //шаг 17.1 – именуем переменные
     private String name;
     private int age;
-    private User(String name, int age) { //шаг 17.2 – инициализируем
+    public User(String name, int age) { //шаг 17.2 – инициализируем /*для метода 21 в DBhelper делаем public*/
         this.name = name;
         this.age = age;
     }
