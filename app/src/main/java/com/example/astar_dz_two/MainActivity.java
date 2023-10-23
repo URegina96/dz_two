@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CreateUserActivity.class);
             startActivity(intent);
         });
+        Button buttonUpdate = findViewById(R.id.buttonUpdate);
+        buttonUpdate.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setupRecyclerView() { //шаг - 20.1 Настраиваем список пользователей
