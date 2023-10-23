@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupRecyclerView() { //шаг - 20.1 Настраиваем список пользователей
         LinearLayoutManager manager = new LinearLayoutManager(this); // создаем менеджер компоновки, чтобы элементы списка отображались вертикально
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);    // создаем разделители между элементами списка
-        usersAdapter = new UsersAdapter();  // создаем адаптер для отображения списка пользователей
+        // создаем обертку над контекстом для предоставления ресурсов
+        ResourceProvider resourceProvider = new ResourceProviderImpl(this);
+        usersAdapter = new UsersAdapter(getLayoutInflater(), resourceProvider);// создаем адаптер для отображения списка пользователей
         RecyclerView recyclerUsers = findViewById(R.id.recyclerUsers);
         recyclerUsers.setLayoutManager(manager);
         recyclerUsers.addItemDecoration(decoration);

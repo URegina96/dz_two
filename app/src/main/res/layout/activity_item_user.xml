@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="60dp">
+
     <TextView
         android:id="@+id/text_user_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:background="@color/red"
+        android:background="@drawable/shogun"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="НОМЕР 1 (id)" />
+        tools:text="10" />
 
     <TextView
         android:id="@+id/text_name"
@@ -27,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@id/text_age"
         app:layout_constraintStart_toEndOf="@id/text_user_id"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="АРХОНТИЩЕ" />
+        tools:text="Сёгун Райден" />
 
     <TextView
         android:id="@+id/text_age"
@@ -38,6 +39,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/text_user_id"
         app:layout_constraintTop_toBottomOf="@id/text_name"
-        tools:text="500+ годиков " />
+        tools:text="10 лет" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
