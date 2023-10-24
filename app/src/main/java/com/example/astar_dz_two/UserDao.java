@@ -6,4 +6,6 @@ public interface UserDao { //шаг 18 – создаем UserDao,  Данный
     List<User> getUsers();//шаг 18.1 – получаем весь список пользователей
 
     void createUser(User user); //шаг 18.1 - создание нового пользователя;  @param user достаточно передать только имя и возраст
+
+    void deleteUser(long id);
 }

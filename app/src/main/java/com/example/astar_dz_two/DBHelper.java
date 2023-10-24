@@ -76,6 +76,12 @@ public class DBHelper extends SQLiteOpenHelper implements UserDao {//шаг-6 с
         values.put(KEY_AGE, user.getAge());
         this.getWritableDatabase().insert(TABLE_CONTACTS, null, values);
     }
+    // DELETE FROM table  WHERE id = :id
+    /*метод для удаления пользователя по id*/
+    @Override
+    public void deleteUser(long id) {
+        this.getWritableDatabase().delete(TABLE_CONTACTS, "id=?", new String[] {"" + id});
+    }
 }
 
 
