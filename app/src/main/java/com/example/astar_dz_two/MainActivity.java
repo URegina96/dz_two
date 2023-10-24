@@ -2,6 +2,8 @@ package com.example.astar_dz_two;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private UserDao userDao;
     private UsersAdapter usersAdapter;
+    private MainViewModel viewModel;
 
     //шаг 20 – setupRecyclerView();setupButtons();setupDatabase(); в  class MainActivity
     @Override
@@ -27,9 +30,24 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
         setupButtons();
         setupDatabase();
-        List<User> users = userDao.getUsers();// получение списка пользователей из базы данных
+        setupViewModel();
+    }
+    @Override //  метод вызывается при запуске активности. Он вызывает метод reloadUsers() viewModel, который извлекает список пользователей из базы данных и обновляет объект userLiveData. Это гарантирует, что самые последние данные будут доступны для пользовательского интерфейса при запуске действия
+    protected void onStart() {
+        super.onStart();
+        viewModel.reloadUsers();
+    }
 
-        usersAdapter.update(users); // отображение списка пользователей в списке , для него в адаптере добавляем метод шаг - 21
+    private void setupViewModel() {
+        ViewModelProvider.Factory factory = new MainViewModel.Factory(userDao);
+        viewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+        viewModel.observeUsers(this, users -> {
+            // обновление списка
+            usersAdapter.update(users);
+        });
+        /* метод отвечает за настройку объекта viewModel. Он создает новый экземпляр MainViewModel.Factory, передавая объект userDao. Затем он использует эту фабрику для создания экземпляра класса MainViewModel с помощью ViewModelProvider
+            Затем он устанавливает наблюдателя для объектаusersLiveData, вызывая метод ObserveUsers(). Этот наблюдатель обновляет пользовательский интерфейс всякий раз, когда меняется список пользователей
+            Наконец, метод ObserveUsers() определяет лямбда-выражение, которое будет выполняться всякий раз, когда наблюдатель получает обновления. В этом случае он обновляет userAdapter последним списком пользователей   */
     }
 
     private void setupDatabase() {  //шаг - 20.3 Настраиваем базу данных
