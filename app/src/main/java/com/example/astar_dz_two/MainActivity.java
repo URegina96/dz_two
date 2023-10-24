@@ -1,6 +1,7 @@
 package com.example.astar_dz_two;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerUsers.setLayoutManager(manager);
         recyclerUsers.addItemDecoration(decoration);
         recyclerUsers.setAdapter(usersAdapter);
+        usersAdapter.setOnDeleteUserListener(new OnDeleteUserListener() {
+            @Override
+            public void onDelete(long id) {
+                deleteUser(id);
+            }
+        });
+
+    }
+    private void deleteUser(long id) {
+        userDao.deleteUser(id);
+        List<User> users = userDao.getUsers();
+        usersAdapter.update(users);
     }
 }
 
